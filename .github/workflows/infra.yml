@@ -10,6 +10,9 @@ jobs:
 
     steps:
     - name: Configure AWS Credentials
+      permissions:
+        id-token: write # This is required for requesting the JWT
+        contents: read  # This is required for actions/checkout
       uses: aws-actions/configure-aws-credentials@v4
       with:
         aws-region: us-east-2
