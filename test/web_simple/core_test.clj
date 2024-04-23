@@ -4,4 +4,6 @@
 
 (deftest a-test
   (testing "I do not fail."
-    (is (= 1 1))))
+    (is (= 1 1)))
+  (testing "I also do not fail."
+    (is (= 2 2))))
