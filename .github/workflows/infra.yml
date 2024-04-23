@@ -1,0 +1,17 @@
+name: Clojure CI
+
+on:
+  push:
+    branches: [ "infra" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-region: us-east-2
+        role-to-assume: arn:aws:iam::533267342896:role/GithubDeploy
+        role-session-name: DeployWebSimple 
