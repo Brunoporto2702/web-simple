@@ -53,12 +53,20 @@ resource "aws_security_group" "allow_web_ssh" {
   }
 }
 
+
 resource "aws_instance" "example" {
   ami             = var.ami_id
   instance_type   = var.instance_type
   security_groups = [aws_security_group.allow_web_ssh.name]
 
+  // Specify the name of the existing key pair
+  key_name = var.key_pair_name
+
+  // Load user data from a local shell script file
+  user_data = file("deploy/setup.sh")
+
   tags = {
     app = "web-simple"
   }
 }
+
