@@ -12,6 +12,9 @@ jobs:
       contents: read  # This is required for actions/checkout
       
     steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v2
+
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
