@@ -3,6 +3,8 @@ name: Infra
 on:
   push:
     branches: [ "infra" ]
+  pull_request:
+    branches: [ "infra" ]
 
 jobs:
   deploy:
@@ -32,3 +34,8 @@ jobs:
 
     - name: Terraform Plan
       run: terraform plan
+
+    # Conditionally apply Terraform changes only for pushes to the infra branch
+    - name: Terraform Apply
+      if: github.event_name == 'push' && github.ref == 'refs/heads/infra'
+      run: terraform apply -auto-approve
