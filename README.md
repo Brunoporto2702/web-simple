@@ -37,3 +37,6 @@ To deploy the application run:
 ```
 docker-compose up
 ```
+
+## Configure AWS credentials for actions
+follow instructions [here](https://github.com/aws-actions/configure-aws-credentials?tab=readme-ov-file#configure-aws-credentials-for-github-actions).
