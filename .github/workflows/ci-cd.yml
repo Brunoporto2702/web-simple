@@ -1,14 +1,26 @@
-name: Build and Push
+name: Clojure CI/CD
 
 on:
-  workflow_run:
-        workflows: ['Clojure CI']
-        types: [completed]
-        branches:
-            - 'main'
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install dependencies
+      run: lein deps
+
+    - name: Run tests
+      run: lein test
+
   build-and-push:
+    needs: ci
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
     - name: Check out the repo
