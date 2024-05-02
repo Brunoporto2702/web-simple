@@ -1,7 +1,7 @@
 version: '3'
 services:
   web:
-    build: .
+    image: brunoporto2702/web-simple:latest
     container_name: web-simple
     restart: always
     environment:
