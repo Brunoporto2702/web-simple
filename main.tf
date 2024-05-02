@@ -54,7 +54,7 @@ resource "aws_security_group" "allow_web_ssh" {
 }
 
 
-resource "aws_instance" "example" {
+resource "aws_instance" "web-simple-server" {
   ami             = var.ami_id
   instance_type   = var.instance_type
   security_groups = [aws_security_group.allow_web_ssh.name]
