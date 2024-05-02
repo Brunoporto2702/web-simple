@@ -7,7 +7,7 @@ LOG_FILE="/var/log/docker-installation.log"
 	sudo yum update -y
 
 	# Install git
-	Sudo yum install git -y
+	sudo yum install git -y
 
 	# Install Docker
 	sudo yum install docker -y
