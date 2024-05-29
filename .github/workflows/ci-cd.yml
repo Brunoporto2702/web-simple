@@ -72,8 +72,5 @@ jobs:
       run: |
         aws ssm send-command --document-name "AWS-RunShellScript" \
                              --targets 'Key=tag:app,Values=web-simple' \
-                             --parameters 'commands=[
-                               "git clone https://github.com/Brunoporto2702/web-simple.git || (cd web-simple && git pull)",
-                               "docker-compose up -d"
-                             ]' \
+                             --parameters '{"commands":["#!/bin/bash", "cd /home/ec2-user", "git clone https://github.com/Brunoporto2702/web-simple.git", "cd web-simple", "sudo git pull", "sudo docker-compose up -d"]}' \
                              --comment "Update repository and deploy using Docker Compose"
