@@ -71,6 +71,6 @@ jobs:
     - name: Send SSM Command to Instances by Tag
       run: |
         aws ssm send-command --document-name "AWS-RunShellScript" \
-                             --targets Key=tag:app,Values="web-simple" \
+                             --targets Key=tag:app,Values="web-simple" \ 
                              --parameters '{"commands":["#!/bin/bash", "cd /home/ec2-user", "git clone https://github.com/Brunoporto2702/web-simple.git", "cd web-simple", "sudo git pull", "sudo docker-compose up -d"]}' \
                              --comment "Update repository and deploy using Docker Compose"
