@@ -41,3 +41,36 @@ jobs:
         platforms: linux/amd64,linux/arm64
         push: true
         tags: brunoporto2702/web-simple:latest
+
+  deploy:
+    needs: build-and-push
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install AWS CLI
+      run: |
+        sudo apt-get update
+        sudo apt-get install awscli -y
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-region: us-east-2
+        role-to-assume: arn:aws:iam::533267342896:role/GithubDeploy
+        role-session-name: DestroyWebSimple
+
+    - name: Send SSM Command to Instances by Tag
+      run: |
+        aws ssm send-command --document-name "AWS-RunShellScript" \
+                             --targets 'Key=tag:app,Values=web-simple' \
+                             --parameters 'commands=[
+                               "git clone https://github.com/Brunoporto2702/web-simple.git || (cd web-simple && git pull)",
+                               "docker-compose up -d"
+                             ]' \
+                             --working-directory "/home/ec2-user" \
+                             --comment "Update repository and deploy using Docker Compose"
