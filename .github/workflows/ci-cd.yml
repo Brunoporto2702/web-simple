@@ -76,5 +76,4 @@ jobs:
                                "git clone https://github.com/Brunoporto2702/web-simple.git || (cd web-simple && git pull)",
                                "docker-compose up -d"
                              ]' \
-                             --working-directory "/home/ec2-user" \
                              --comment "Update repository and deploy using Docker Compose"
