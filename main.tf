@@ -66,7 +66,7 @@ resource "aws_instance" "web-simple-server" {
   user_data = file("deploy/setup.sh")
 
   // Add iam instance profile 
-  iam_instance_profile = "arn:aws:iam::533267342896:role/EC2SSM"
+  iam_instance_profile = "arn:aws:iam::533267342896:instance-profile/EC2SSM"
 
   tags = {
     app = "web-simple"
