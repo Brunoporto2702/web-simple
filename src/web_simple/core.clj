@@ -4,8 +4,7 @@
   (:gen-class))
 
 (defn respond-hello [request]
-  {:status 200 :body "Hello, world!"})
-
+  {:status 200 :body "Hello, world 2!"})
 
 (def routes
   (route/expand-routes
@@ -19,7 +18,7 @@
     ::http/port 8890}))
 
 (defn start []
-  (http/start (create-server))) 
+  (http/start (create-server)))
 
 (defn -main
   []
