@@ -65,7 +65,7 @@ resource "aws_instance" "web-simple-server" {
   // Load user data from a local shell script file
   user_data = file("deploy/setup.sh")
 
-  // Add iam instance profile 
+  // Add iam instance profilee 
   iam_instance_profile = "EC2SSM"
 
   tags = {
